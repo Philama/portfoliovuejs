@@ -17,17 +17,13 @@ import img15 from '/src/components/icons/visual.svg';
 import img16 from '/src/components/icons/mongo.svg';
 import img17 from '/src/components/icons/mysql.svg';
 import img18 from '/src/components/icons/postgres.svg';
-import img19 from '/src/components/icons/arg.svg';
-import img20 from '/src/components/icons/eeuu.svg';
 
-//Se importa ref de vue para poder usarlo
-import { ref } from 'vue';
-//Se crea un array de objetos con las habilidades
-//Este es un array de objetos con habilidades que se pueden modificar o agregar
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
+
 const habilidades = ref([
-    {// Se crea un objeto con id, nombre y habilidades
+    {
         id: 1, nombre: 'Lenguajes de Programación', habilidades: [
-            //Se crea un objeto con id, nombre, nivel e icono
             { id: 1, nombre: 'JavaScript', nivel: 'Avanzado', icono: img1 },
             { id: 2, nombre: 'Python', nivel: 'Intermedio', icono: img2 },
             { id: 3, nombre: 'HTML/CSS', nivel: 'Avanzado', icono: img3 },
@@ -61,161 +57,50 @@ const habilidades = ref([
         ]
     },
     {
-        id: 5, nombre: 'Idiomas', habilidades: [
-            { id: 1, nombre: 'Español', nivel: 'avanzado (C2)', icono: img19 },
-            { id: 2, nombre: 'Inglés', nivel: 'Avanzado (C2)', icono: img20 }
-            
+        id: 5,
+        nombre: 'Idiomas',
+        habilidades: [
+            { id: 1, nombre: 'Español', nivel: 'Nativo (C2)', codigo: 'ARG' },
+            { id: 2, nombre: 'Inglés', nivel: 'Avanzado (C2)', codigo: 'USA' },
+            { id: 3, nombre: 'Francés', nivel: 'Nativo (C2)', codigo: 'FRA' },
+            { id: 4, nombre: 'Criollo Haitiano', nivel: 'Nativo (C2)', codigo: 'HTI' }
         ]
     }
 ]);
 
+const cargarBanderas = async () => {
+    try {
+        for (const idioma of habilidades.value[4].habilidades) {
+            const response = await axios.get(`https://restcountries.com/v3.1/alpha/${idioma.codigo}`);
+            idioma.icono = response.data[0].flags.svg;
+        }
+    } catch (error) {
+        console.error('Error al cargar las banderas:', error);
+    }
+};
+
+onMounted(() => {
+    cargarBanderas();
+});
 </script>
 
-
 <template>
-    <!--Este componente vue funciona de esta forma:-->
     <div class="skills-contenedor">
-        <!--Se recorre el array habilidades con v-for y se asigna la key habilidad.id-->
         <div v-for="habilidad in habilidades" :key="habilidad.id" class="skills-categoria">
-            <!--Se muestra el nombre de la habilidad-->
             <h3>{{ habilidad.nombre }}</h3>
             <ul class="skills">
-                <!--Se recorre el array habilidades con v-for y se asigna la key habilidad.id-->
-                <li v-for="habilidad in habilidad.habilidades" :key="habilidad.id" class="skill">
-                    <!--Se muestra el icono de la habilidad y el nombre de la habilidad con su nivel-->
-                    <img :src="habilidad.icono" :alt="habilidad.nombre">
-                    <!--Se muestra el icono de la habilidad y el nombre de la habilidad con su nivel-->
-                    <span>{{ habilidad.nombre }}: {{ habilidad.nivel }}</span>
+                <li v-for="habilidadItem in habilidad.habilidades" :key="habilidadItem.id" class="skill">
+                    <img :src="habilidadItem.icono" :alt="habilidadItem.nombre">
+                    <span>{{ habilidadItem.nombre }}: {{ habilidadItem.nivel }}</span>
                 </li>
             </ul>
         </div>
     </div>
-
-    <!-- <div class="skills-contenedor">
-        <div class="skills-categoria">
-            <h3>Lenguajes de Programación</h3>
-            <ul class="skills">
-                <li class="skill">
-                    <img src="/src/components/icons/js.svg" alt="JavaScript">
-                    <span>JavaScript: Avanzado</span>
-                </li>
-                <li class="skill">
-                    <img src="/src/components/icons/python.svg" alt="Python">
-                    <span>Python: Intermedio</span>
-                </li>
-                <li class="skill">
-                    <img src="/src/components/icons/html-css.svg" alt="HTML/CSS">
-                    <span>HTML/CSS: Avanzado</span>
-                </li>
-                <li class="skill">
-                    <img src="/src/components/icons/java.svg" alt="Java">
-                    <span>Java: Intermedio</span>
-                </li>
-                <li class="skill">
-                    <img src="/src/components/icons/sql.svg" alt="SQL">
-                    <span>SQL: Intermedio</span>
-                </li>
-            </ul>
-        </div>
-
-        <div class="skills-categoria">
-            <h3>Frameworks y Librerías</h3>
-            <ul class="skills">
-                <li class="skill">
-                    <img src="/src/components/icons/react.svg" alt="React.js">
-                    <span>React.js: Avanzado</span>
-                </li>
-                <li class="skill">
-                    <img src="/src/components/icons/vue.svg" alt="Vue.js">
-                    <span>Vue.js: Intermedio</span>
-                </li>
-                <li class="skill">
-                    <img src="/src/components/icons/node.svg" alt="Node.js">
-                    <span>Node.js: Avanzado</span>
-                </li>
-                <li class="skill">
-                    <img src="/src/components/icons/django.svg" alt="Django">
-                    <span>Django: Intermedio</span>
-                </li>
-                <li class="skill">
-                    <img src="/src/components/icons/bootstrap.svg" alt="Bootstrap">
-                    <span>Bootstrap: Avanzado</span>
-                </li>
-            </ul>
-        </div>
-
-        <div class="skills-categoria">
-            <h3>Herramientas y Software</h3>
-            <ul class="skills">
-                <li class="skill">
-                    <img src="/src/components/icons/git.svg" alt="Git">
-                    <span>Git: Avanzado</span>
-                </li>
-                <li class="skill">
-                    <img src="/src/components/icons/docker.svg" alt="Docker">
-                    <span>Docker: Intermedio</span>
-                </li>
-                <li class="skill">
-                    <img src="/src/components/icons/cypress.svg" alt="Cypress">
-                    <span>Cypress: Intermedio</span>
-                </li>
-                <li class="skill">
-                    <img src="/src/components/icons/figma.svg" alt="Figma">
-                    <span>Figma: Intermedio</span>
-                </li>
-                <li class="skill">
-                    <img src="/src/components/icons/visual.svg" alt="Visual Studio Code">
-                    <span>Visual Studio Code: Avanzado</span>
-                </li>
-            </ul>
-        </div>
-
-        <div class="skills-categoria">
-            <h3>Bases de Datos</h3>
-            <ul class="skills">
-                <div class="skill">
-                    <img src="/src/components/icons/mongo.svg" alt="MongoDB">
-                    <span>MongoDB: Avanzado</span>
-                </div>
-                <div class="skill">
-                    <img src="/src/components/icons/mysql.svg" alt="MySQL">
-                    <span>MySQL: Intermedio</span>
-                </div>
-                <div class="skill">
-                    <img src="/src/components/icons/postgres.svg" alt="PostgreSQL">
-                    <span>PostgreSQL: Intermedio</span>
-                </div>
-            </ul>
-        </div>
-
-        <div class="skills-categoria">
-            <h3>Idiomas</h3>
-            <ul class="skills">
-                <li class="skill">
-                    <img src="/src/components/icons/arg.svg" alt="Español">
-                    <span>Español: Nativo</span>
-                </li>
-                <li class="skill">
-                    <img src="/src/components/icons/eeuu.svg" alt="Inglés">
-                    <span>Inglés: Avanzado (C1)</span>
-                </li>
-            </ul>
-        </div>
-    </div> -->
 </template>
 
 <style scoped>
 .skills-contenedor {
     padding: 2rem;
-    /*Fondo cargado desde una imagen estatica en Assets*/
-    /* background-image: url('/src/assets/fondo-proyectos.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat; */
-    /*Fondo con gradiente*/
-
-    /*Fondo con color solido*/
-    /* background-color: rgb(28, 41, 52); */
 }
 
 .skills-categoria {

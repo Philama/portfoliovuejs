@@ -1,18 +1,44 @@
-
 <script setup>
-import {ref} from 'vue';
-const fechaColor = ref([]);
-fechaColor.value = [
-    {color: '#41516c'},
-    {color: '#FBCA3E'},
-    {color: '#E24A68'},
-    {color: '#4CADAD'}
-];
-const educacion = ref ([]);
-educacion.value = [
-    {fecha: '2024', tittle: 'Tecnicatura Universitaria en Programacion', descripcion: 'Operacion y programacion de computadoras.', enlace:'http:youtube.com'},
-    {fecha: '2015', tittle: 'Ingenieria en Sistema', descripcion: 'Universidad Tecnologica de Cordoba', enlace: 'http:youtube.com'}
-]
+import { ref } from 'vue';
+
+const fechaColor = ref([
+  { color: '#41516c' },
+  { color: '#FBCA3E' },
+  { color: '#E24A68' },
+  { color: '#4CADAD' },
+]);
+
+const educacion = ref([
+  {
+    fecha: '2022',
+    tittle: 'Tecnicatura Universitaria en Programación',
+    descripcion: 'Operación y programación de computadoras.',
+    enlace: 'https://youtube.com',
+  },
+  {
+    fecha: '2015',
+    tittle: 'Ingeniería en Sistemas',
+    descripcion: 'Universidad Tecnológica de Córdoba',
+    enlace: 'https://youtube.com',
+  },
+  {
+    fecha: '2021 - 2022',
+    tittle: 'TEST AUTOMATION UNIVERSITY (TAU)',
+    descripcion: 'Web UI JavaScript Path & Mobile JavaScript Path.',
+    enlace: 'https://testautomationu.applitools.com/',
+  },
+  {
+    fecha: 'Jul-2022 - 2023',
+    tittle: 'AVALTH Skill Factory ReactJS',
+    descripcion: 'Training in Full Stack MERN Development provided by the Avalith team.',
+    enlace: 'https://avalith.net/',
+  },
+]);
+
+// Validar datos
+educacion.value = educacion.value.filter(
+  (item) => item.fecha && item.tittle && item.descripcion
+);
 </script>
 
 <template> 
@@ -91,6 +117,10 @@ ul li{
     grid-row: span 2; /*Cada item ocupa dos filas en la cuadricula */
     display: grid; /*Usa un layout de cuadricula dentro de cada item */
     grid-template-rows: min-content min-content min-content; /*Define tres filas de altura minima */
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 0.5s ease-in-out forwards;
+    animation-delay: calc(0.1s * var(--index));
 }
 
 /*Estilos para la fecha dentro de cada item */
@@ -148,6 +178,22 @@ ul li .tittle{
     padding-block-start: 1rem; /*Espaciado interno superior */
     padding-inline-end: 1rem; /*Espaciado interno inferior */
     font-weight: 500; /*Hace el texto del titulo un poco mas grueso */
+}
+
+ul li .tittle a {
+  text-decoration: none;
+  color: var(--color);
+  transition: color 0.3s ease;
+}
+
+ul li .tittle a:hover {
+  color: var(--fecha-color);
+}
+
+ul li .descripcion {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #555;
 }
 
 ul li .descripcion{
@@ -222,5 +268,12 @@ ul li .descripcion::before{
     .credits a{
         color: var(--color); /*Aplica el color de texto definido e nla variable */
     }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 </style>

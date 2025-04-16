@@ -22,9 +22,15 @@ const navegacion= ref([
 
 <style scoped>
 .navbar {
- 
+  position: fixed; /* Fija la barra de navegación en la parte superior */
+  top: 0; /* Alinea la barra al borde superior */
+  left: 0; /* Alinea la barra al borde izquierdo */
+  width: 100%; /* Asegura que la barra ocupe todo el ancho */
+  z-index: 1000; /* Asegura que la barra esté por encima de otros elementos */
+  background-color: #01182c; /* Fondo sólido azul */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra para destacar la barra */
+  padding: 1rem; /* Espaciado interno */
   color: #fff; /* Establece el color del texto en blanco */
-  padding: 0.5rem 1rem; /* Añade un padding de 0.5rem arriba y abajo, y 1rem a los lados */
   align-items: center; /* Centra verticalmente los elementos dentro de la navbar */
 }
 
@@ -37,12 +43,6 @@ const navegacion= ref([
 .navbar-menu {
   display: flex; /* Organiza los elementos en línea usando flexbox */
   justify-content: flex-end; /* Alinea los elementos al final de la navbar */
-  
-}
-
-.nav-list {
-  list-style: none; /* Elimina los puntos o números de las listas */
-
 }
 
 a {
@@ -56,17 +56,15 @@ a {
 }
 
 a:hover {
-
-  background-color: hsla(204, 100%, 58%, 0.934); /* Cambia el color de fondo al pasar el mouse sobre un enlace */
-  box-shadow: 0 0 10px hsla(204, 100%, 58%, 0.934);
+  background-color: #0056b3; /* Cambia el color de fondo al pasar el mouse sobre un enlace */
+  box-shadow: 0 0 10px #0056b3;
 }
 
 @media (max-width: 768px) {
-.navbar-menu {
-  display: flex; /* Organiza los elementos en línea usando flexbox */
-  justify-content: center; /* Alinea los elementos al final de la navbar */
-  width: 100%; /* Asegura que la navbar ocupe el 100% del ancho en pantallas pequeñas */
+  .navbar-menu {
+    display: flex; /* Organiza los elementos en línea usando flexbox */
+    justify-content: center; /* Alinea los elementos al centro en pantallas pequeñas */
+    width: 100%; /* Asegura que la navbar ocupe el 100% del ancho en pantallas pequeñas */
+  }
 }
-}
-
 </style>
