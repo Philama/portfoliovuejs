@@ -52,70 +52,51 @@ export const datosPersonales = {
 };
 
 export const experiencia = [
-  { id: 1, src: iconoVentas, parrafo: 'Lideré un equipo de 5 desarrolladores en la creación de una plataforma de comercio electrónico que incrementó las ventas en un 35% durante el primer año.' },
-  { id: 2, src: iconoEcomerce, parrafo: 'Diseñé y desarrollé aplicaciones web utilizando Node.js, React y MongoDB, logrando reducir el tiempo de carga de las páginas en un 50%.' },
-  { id: 3, src: iconoConfig, parrafo: 'Implementé soluciones de autenticación y autorización, mejorando la seguridad del sitio web y reduciendo los intentos de acceso no autorizado en un 20%.' },
-  { id: 4, src: iconoUiUx, parrafo: 'Colaboré con diseñadores de UX/UI para crear interfaces de usuario atractivas y fáciles de usar, aumentando la satisfacción del cliente en un 15%.' },
-  { id: 5, src: iconoWatch, parrafo: 'Automaticé procesos de despliegue continuo utilizando Jenkins y Docker, reduciendo los tiempos de despliegue en un 40%.' },
+  {
+    id: 1,
+    src: iconoVentas,
+    parrafo: 'Desarrollador Full Stack | Freelance (2024 - Presente): Desarrollo de aplicaciones web a medida para clientes internacionales usando Vue.js y Node.js.'
+  },
+  {
+    id: 2,
+    src: iconoEcomerce,
+    parrafo: 'Desarrollador Frontend | Empresa X (2022 - 2024): Optimización de interfaces de usuario y mejora de rendimiento en e-commerce de alto tráfico.'
+  },
+  {
+    id: 3,
+    src: iconoConfig,
+    parrafo: 'Soporte Técnico IT | Empresa Y (2020 - 2022): Resolución de incidentes, mantenimiento de servidores y soporte a usuarios finales.'
+  },
+  {
+    id: 4,
+    src: iconoUiUx,
+    parrafo: 'Prácticas Profesionales | Estudio de Diseño (2019): Colaboración en el diseño de prototipos UI/UX para aplicaciones móviles.'
+  },
 ];
 
 export const proyectos = [
   {
     id: 1,
     src: imgRestaurant,
-    titulo: "Aplicación de Reservas para Restaurantes (2023)",
-    descripcion: "Creé una aplicación móvil con Flutter que permite a los usuarios reservar mesas en restaurantes locales.",
-    tags: ["Flutter", "Mobile"]
+    titulo: "Sistema de Reservas (Demo)",
+    descripcion: "Aplicación completa para gestionar reservas de restaurantes. Tech stack: Vue.js, Firebase.",
+    tags: ["Vue.js", "Firebase", "Web App"]
   },
   {
     id: 2,
     src: imgElearning,
-    titulo: "Plataforma de E-learning (2022)",
-    descripcion: "Diseñé y desarrollé una plataforma de educación en línea utilizando Django y React. Incluye gestión de cursos y foros de discusión.",
-    tags: ["Django", "React", "Education"]
+    titulo: "Plataforma Educativa (Demo)",
+    descripcion: "Sitio web de cursos online con dashboard de estudiantes y pasarela de pagos.",
+    tags: ["React", "Node.js", "Stripe"]
   },
   {
     id: 3,
     src: imgBlog,
-    titulo: "Blog Personal con CMS (2022)",
-    descripcion: "Construí un blog personal con un sistema de gestión de contenidos (CMS) personalizado en WordPress.",
-    tags: ["WordPress", "CMS"]
+    titulo: "Blog Personal (Demo)",
+    descripcion: "Blog optimizado para SEO con CMS headless y diseño minimalista.",
+    tags: ["Astro", "Markdown", "SEO"]
   },
-  {
-    id: 4,
-    src: imgRestaurant,
-    titulo: "Sistema de Gestión de Inventarios (2023)",
-    descripcion: "Desarrollé un sistema de gestión de inventarios para pequeñas empresas utilizando Vue.js y Firebase.",
-    tags: ["Vue.js", "Firebase"]
-  },
-  {
-    id: 5,
-    src: "https://picsum.photos/300/200?random=5",
-    titulo: "Aplicación de Clima en Tiempo Real (2023)",
-    descripcion: "Creé una aplicación móvil que muestra el clima en tiempo real utilizando APIs públicas como OpenWeather.",
-    tags: ["API", "Weather"]
-  },
-  {
-    id: 6,
-    src: "https://picsum.photos/300/200?random=6",
-    titulo: "Tienda en Línea con Carrito de Compras (2022)",
-    descripcion: "Diseñé una tienda en línea con Laravel y Vue.js que incluye un carrito de compras y pasarela de pagos.",
-    tags: ["Laravel", "Vue.js", "E-commerce"]
-  },
-  {
-    id: 7,
-    src: "https://picsum.photos/300/200?random=7",
-    titulo: "Sistema de Gestión de Tareas (2023)",
-    descripcion: "Desarrollé un sistema de gestión de tareas colaborativo con Node.js y MongoDB. Incluye un tablero Kanban interactivo.",
-    tags: ["Node.js", "MongoDB"]
-  },
-  {
-    id: 8,
-    src: "https://picsum.photos/300/200?random=8",
-    titulo: "Aplicación de Seguimiento de Hábitos (2023)",
-    descripcion: "Construí una aplicación móvil para el seguimiento de hábitos diarios utilizando Flutter y Firebase.",
-    tags: ["Flutter", "Firebase"]
-  }
+  // Añade tus proyectos reales aquí copiando la estructura anterior
 ];
 
 export const habilidades = [
