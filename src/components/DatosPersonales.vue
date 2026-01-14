@@ -6,6 +6,10 @@ import { datosPersonales } from '../data/data.js';
 <template>
   <section class="hero-section">
     <div class="hero-content">
+      <div class="hero-image">
+        <img :src="datosPersonales.fotoPerfil" alt="Foto de perfil" />
+      </div>
+
       <div class="hero-text">
         <h1>{{ datosPersonales.nombre }}</h1>
         <h2>{{ datosPersonales.titulo }}</h2>
@@ -29,10 +33,6 @@ import { datosPersonales } from '../data/data.js';
           <small>{{ datosPersonales.residencia }}</small>
         </div>
       </div>
-
-      <div class="hero-image">
-        <img :src="datosPersonales.fotoPerfil" alt="Foto de perfil" />
-      </div>
     </div>
   </section>
 </template>
@@ -43,70 +43,59 @@ import { datosPersonales } from '../data/data.js';
   display: flex;
   justify-content: center;
   background-color: var(--color-background);
-  /* Asegura que el fondo sea correcto */
 }
 
 .hero-content {
   display: flex;
-  flex-direction: column-reverse;
-  /* Móvil primero: texto abajo, imagen arriba (opcional, o columna normal) */
+  flex-direction: column;
+  /* Stacked layout for centered look */
   align-items: center;
-  max-width: 1200px;
+  max-width: 800px;
+  /* Reduced width for better centered focus */
   width: 100%;
-  gap: 3rem;
+  gap: 2rem;
+  text-align: center;
 }
 
-/* Diseño de escritorio */
-@media (min-width: 768px) {
-  .hero-content {
-    flex-direction: row;
-    justify-content: space-between;
-    text-align: left;
-  }
-
-  .hero-text {
-    flex: 1;
-    align-items: flex-start;
-    /* Alinea items a la izquierda */
-    text-align: left;
-  }
-
-  .hero-image {
-    flex: 1;
-    display: flex;
-    justify-content: flex-end;
-    /* Imagen a la derecha */
-  }
+.hero-image img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--color-primary);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .hero-text {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* Centrado en móvil */
-  text-align: center;
-  /* Centrado en móvil */
-  gap: 1.5rem;
+  /* Center everything */
+  gap: 1rem;
 }
 
 h1 {
-  font-size: 3.5rem;
+  font-size: 3rem;
   line-height: 1.2;
-  color: var(--color-heading);
+  color: var(--color-primary);
+  /* Check main.css/base.css for this variable */
   font-weight: 800;
+  margin-bottom: 0.5rem;
 }
 
 h2 {
-  font-size: 1.8rem;
-  color: var(--color-primary);
+  font-size: 1.5rem;
+  color: var(--color-secondary);
   font-weight: 500;
+  margin-bottom: 1rem;
 }
 
 .descripcion {
   font-size: 1.2rem;
-  color: var(--color-secondary);
+  color: var(--color-text);
   max-width: 600px;
   line-height: 1.6;
+  opacity: 0.9;
 }
 
 .social-links {
@@ -114,11 +103,12 @@ h2 {
   gap: 1.5rem;
   list-style: none;
   padding: 0;
+  margin: 1.5rem 0;
 }
 
 .icon-redsocial {
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   transition: transform 0.3s ease;
 }
 
@@ -127,13 +117,13 @@ h2 {
 }
 
 .hero-actions {
-  margin-top: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .btn-primary {
   background-color: var(--color-primary);
   color: white;
-  padding: 0.8rem 2rem;
+  padding: 0.8rem 2.5rem;
   border-radius: 50px;
   font-weight: 600;
   text-decoration: none;
@@ -142,25 +132,16 @@ h2 {
 }
 
 .btn-primary:hover {
-  background-color: var(--color-primary);
-  /* Podrías oscurecerlo un poco con CSS filters o variable hover */
   filter: brightness(0.9);
   transform: translateY(-2px);
 }
 
-.hero-image img {
-  width: 280px;
-  height: 280px;
-  border-radius: 50%;
-  /* Opcional: square con border radius pequeño para modernizar */
-  object-fit: cover;
-  border: 5px solid var(--color-primary);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-}
-
 .location-info {
-  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
   color: var(--color-secondary);
+  font-size: 0.9rem;
   opacity: 0.8;
 }
 </style>
