@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: http://philama.is-a.dev/sitemap.xml

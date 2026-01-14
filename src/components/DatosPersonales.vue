@@ -24,6 +24,8 @@ import { datosPersonales } from '../data/data.js';
         </div>
 
         <div class="location-info">
+          <p>{{ datosPersonales.email }}</p>
+          <p>{{ datosPersonales.telefono }}</p>
           <small>{{ datosPersonales.residencia }}</small>
         </div>
       </div>

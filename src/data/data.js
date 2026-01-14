@@ -9,6 +9,8 @@ import imgRestaurant from '../assets/restaurant.png';
 import imgElearning from '../assets/e-learning.png';
 import imgBlog from '../assets/blog.png';
 
+import imgLogo from '../assets/logo.jpg';
+
 // Icons for Skills
 import iconJs from '../components/icons/js.svg';
 import iconPython from '../components/icons/python.svg';
@@ -39,7 +41,9 @@ export const datosPersonales = {
   residencia: "Cordoba Capital, Cordoba, Argentina",
   presentacion: "Hola, bienvenido a mi portafolio de proyectos. Soy un desarrollador web con experiencia en el desarrollo de aplicaciones web.",
   email: "Guardi2005@yahoo.fr",
+  telefono: "+54 9 351 208-0323",
   fotoPerfil: "https://avatars.githubusercontent.com/u/25463245?v=4",
+  logo: imgLogo,
   redesSociales: [
     { id: 1, name: "LinkedIn", src: iconLinkedin, url: 'https://www.linkedin.com/in/guardini-philama/' },
     { id: 2, name: "WhatsApp", src: 'https://img.icons8.com/color/48/whatsapp--v1.png', url: 'https://wa.me/5493512080323' },
