@@ -1,123 +1,164 @@
+<script setup>
 import { datosPersonales } from '../data/data.js';
+</script>
 
 
 <template>
-  <section class="datos-personales">
-    <div class="card">
-      <img :src="datosPersonales.fotoPerfil" alt="Foto de perfil" class="foto-perfil" />
-      <h1>{{ datosPersonales.nombre }}</h1>
-      <h2>{{ datosPersonales.titulo }}</h2>
-      <p class="descripcion">{{ datosPersonales.presentacion }}</p>
+  <section class="hero-section">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1>{{ datosPersonales.nombre }}</h1>
+        <h2>{{ datosPersonales.titulo }}</h2>
+        <p class="descripcion">{{ datosPersonales.presentacion }}</p>
 
-      <ul class="container-lista">
-        <li v-for="red in datosPersonales.redesSociales" :key="red.id">
-          <a :href="red.url" target="_blank" rel="noopener noreferrer">
-            <img class="icon-redsocial" :src="red.src" width="35rem" :alt="red.name">
-          </a>
-        </li>
-      </ul>
+        <ul class="social-links">
+          <li v-for="red in datosPersonales.redesSociales" :key="red.id">
+            <a :href="red.url" target="_blank" rel="noopener noreferrer">
+              <img class="icon-redsocial" :src="red.src" :alt="red.name">
+            </a>
+          </li>
+        </ul>
 
-      <!-- Contact Button -->
-      <div class="contact-container">
-        <a :href="`mailto:${datosPersonales.email}`" class="btn-contacto">Contactar</a>
+        <div class="hero-actions">
+          <a :href="`mailto:${datosPersonales.email}`" class="btn-primary">Contactar</a>
+        </div>
+
+        <div class="location-info">
+          <small>{{ datosPersonales.residencia }}</small>
+        </div>
       </div>
 
-      <div class="info-footer">
-        <!-- <h3>{{ datosPersonales.email }}</h3> -->
-        <h4>{{ datosPersonales.residencia }}</h4>
+      <div class="hero-image">
+        <img :src="datosPersonales.fotoPerfil" alt="Foto de perfil" />
       </div>
     </div>
   </section>
 </template>
 
 <style scoped>
-h1 {
+.hero-section {
+  padding: 4rem 2rem;
+  display: flex;
+  justify-content: center;
+  background-color: var(--color-background);
+  /* Asegura que el fondo sea correcto */
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column-reverse;
+  /* Móvil primero: texto abajo, imagen arriba (opcional, o columna normal) */
+  align-items: center;
+  max-width: 1200px;
+  width: 100%;
+  gap: 3rem;
+}
+
+/* Diseño de escritorio */
+@media (min-width: 768px) {
+  .hero-content {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+
+  .hero-text {
+    flex: 1;
+    align-items: flex-start;
+    /* Alinea items a la izquierda */
+    text-align: left;
+  }
+
+  .hero-image {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    /* Imagen a la derecha */
+  }
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Centrado en móvil */
   text-align: center;
-  font-size: 4rem;
+  /* Centrado en móvil */
+  gap: 1.5rem;
+}
+
+h1 {
+  font-size: 3.5rem;
+  line-height: 1.2;
+  color: var(--color-heading);
+  font-weight: 800;
 }
 
 h2 {
-  text-align: center;
-  font-size: 2rem;
-  color: var(--color-text);
+  font-size: 1.8rem;
+  color: var(--color-primary);
+  font-weight: 500;
 }
 
-p {
+.descripcion {
   font-size: 1.2rem;
-  font-weight: 100;
-  margin-bottom: 1rem;
   color: var(--color-secondary);
+  max-width: 600px;
+  line-height: 1.6;
 }
 
-.card {
-  padding: 10px;
-  margin: 10px;
-  text-align: center;
-}
-
-.foto-perfil {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  margin: 0 auto 1rem;
-  display: block;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-
-.container-lista {
+.social-links {
   display: flex;
-  justify-content: center;
+  gap: 1.5rem;
   list-style: none;
   padding: 0;
-  margin: 0;
-  text-align: center;
 }
 
 .icon-redsocial {
-  width: 35px;
-  height: 35px;
-  align-items: center;
-  background-color: rgb(21, 30, 70);
-  border-radius: 50%;
-  padding: 0px;
-  margin: 5px;
-  box-shadow: 0 0 10px hsla(204, 100%, 58%, 0.934);
+  width: 40px;
+  height: 40px;
+  transition: transform 0.3s ease;
 }
 
 .icon-redsocial:hover {
-  background-color: hsla(204, 100%, 58%, 0.934);
-  box-shadow: 0 0 10px rgba(77, 139, 255, 0.815);
+  transform: scale(1.1);
 }
 
-h3 {
-  font-size: 1.2rem;
-  font-weight: 500;
-  text-align: center;
-}
-
-.contact-container {
-  margin: 20px 0;
-  text-align: center;
-}
-
-.btn-contacto {
-  background-color: #007bff;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 25px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background-color 0.3s, transform 0.2s;
-  display: inline-block;
-}
-
-.btn-contacto:hover {
-  background-color: #0056b3;
-  transform: scale(1.05);
-}
-
-.info-footer {
+.hero-actions {
   margin-top: 1rem;
-  color: #ccc;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: white;
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary);
+  /* Podrías oscurecerlo un poco con CSS filters o variable hover */
+  filter: brightness(0.9);
+  transform: translateY(-2px);
+}
+
+.hero-image img {
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  /* Opcional: square con border radius pequeño para modernizar */
+  object-fit: cover;
+  border: 5px solid var(--color-primary);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.location-info {
+  margin-top: 1rem;
+  color: var(--color-secondary);
+  opacity: 0.8;
 }
 </style>

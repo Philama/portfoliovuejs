@@ -36,8 +36,8 @@ export const datosPersonales = {
   nombre: "Guardini Philama",
   titulo: "Técnico Universitario en Programación",
   descripcion: "Desarrollador Web Full Stack",
-  residencia: "Córdoba Capital, Córdoba, Argentina",
-  presentacion: "Hola, bienvenido a mi portafolio. Soy un desarrollador apasionado por crear soluciones web eficientes y escalables.",
+  residencia: "Cordoba Capital, Cordoba, Argentina",
+  presentacion: "Hola, bienvenido a mi portafolio de proyectos. Soy un desarrollador web con experiencia en el desarrollo de aplicaciones web.",
   email: "Guardi2005@yahoo.fr",
   fotoPerfil: "https://avatars.githubusercontent.com/u/25463245?v=4",
   redesSociales: [
