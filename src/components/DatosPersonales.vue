@@ -1,102 +1,147 @@
 <script setup>
-import linkedin from '/src/assets/icons8-linkedin.svg';
-import github from '/src/assets/icons8-github.svg';
-
-const fotoPerfil = "https://avatars.githubusercontent.com/u/25463245?v=4"; // Reemplaza con tu URL real
-const tittle = "Guardini Philama";
-const descripcion = "Tecnico Universitario en Programacion";
-const residencia = "Cordoba Capital, Cordoba, Argentina";
-const presentacion = "Hola, bienvenido a mi portafolio de proyectos. Soy un desarrollador web con experiencia en el desarrollo de aplicaciones web.";
-const redesSociales = [
-    {id: 1, name: "LinkedIn", src: linkedin, url: 'https://www.linkedin.com/in/guardini-philama/'},
-    {id: 2, name: "WhatsApp", src: 'https://img.icons8.com/color/48/whatsapp--v1.png', url: 'https://wa.me/5493512080323'},
-    {id: 3, name: "GitHub", src: github, url: 'https://github.com/Philama'}     
-];
-const mail = 'Guardi2005@yahoo.fr';
+import { datosPersonales } from '../data/data.js';
 </script>
 
+
 <template>
-  <section class="datos-personales">
-       <div class="card">
-               <img :src="fotoPerfil" alt="Foto de perfil" class="foto-perfil" />
-               <h1>{{ tittle }}</h1>
-               <h2>{{descripcion}}</h2>
-               <p>{{presentacion}}</p>
-               <ul class="container-lista">
-                    <li v-for="red in redesSociales" :key="red.id">
-                        <a :href="red.url" target="_blank" rel="noopener noreferrer">
-                            <img class="icon-redsocial" :src="red.src" width="35rem" :alt="red.name">
-                        </a>
-                    </li>
-               </ul>
-               <h3>Contacto: {{mail}}</h3>
-               <h4>{{residencia}}</h4>
-         </div>
-   </section>
+  <section class="hero-section">
+    <div class="hero-content">
+      <div class="hero-image">
+        <img :src="datosPersonales.fotoPerfil" alt="Foto de perfil" />
+      </div>
+
+      <div class="hero-text">
+        <h1>{{ datosPersonales.nombre }}</h1>
+        <h2>{{ datosPersonales.titulo }}</h2>
+        <p class="descripcion">{{ datosPersonales.presentacion }}</p>
+
+        <ul class="social-links">
+          <li v-for="red in datosPersonales.redesSociales" :key="red.id">
+            <a :href="red.url" target="_blank" rel="noopener noreferrer">
+              <img class="icon-redsocial" :src="red.src" :alt="red.name">
+            </a>
+          </li>
+        </ul>
+
+        <div class="hero-actions">
+          <a :href="`mailto:${datosPersonales.email}`" class="btn-primary">Contactar</a>
+        </div>
+
+        <div class="location-info">
+          <p>{{ datosPersonales.email }}</p>
+          <p>{{ datosPersonales.telefono }}</p>
+          <small>{{ datosPersonales.residencia }}</small>
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
 
 <style scoped>
-h1 {
+.hero-section {
+  padding: 4rem 2rem;
+  display: flex;
+  justify-content: center;
+  background-color: var(--color-background);
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  /* Stacked layout for centered look */
+  align-items: center;
+  max-width: 800px;
+  /* Reduced width for better centered focus */
+  width: 100%;
+  gap: 2rem;
   text-align: center;
-  font-size: 4rem;
+}
+
+.hero-image img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--color-primary);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Center everything */
+  gap: 1rem;
+}
+
+h1 {
+  font-size: 3rem;
+  line-height: 1.2;
+  color: var(--color-primary);
+  /* Check main.css/base.css for this variable */
+  font-weight: 800;
+  margin-bottom: 0.5rem;
 }
 
 h2 {
-  text-align: center;
-  font-size: 2rem;
-  color: rgb(236, 236, 236);
-}
-
-p {
-  font-size: 1.2rem;
-  font-weight: 100;
+  font-size: 1.5rem;
+  color: var(--color-secondary);
+  font-weight: 500;
   margin-bottom: 1rem;
-  color: rgb(236, 236, 236);
 }
 
-.card {
-  padding: 10px;
-  margin: 10px;
-  text-align: center;
+.descripcion {
+  font-size: 1.2rem;
+  color: var(--color-text);
+  max-width: 600px;
+  line-height: 1.6;
+  opacity: 0.9;
 }
 
-.foto-perfil {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  margin: 0 auto 1rem;
-  display: block;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-
-.container-lista {
+.social-links {
   display: flex;
-  justify-content: center;
+  gap: 1.5rem;
   list-style: none;
   padding: 0;
-  margin: 0;
-  text-align: center;
+  margin: 1.5rem 0;
 }
 
 .icon-redsocial {
   width: 35px;
   height: 35px;
-  align-items: center;
-  background-color: rgb(21, 30, 70);
-  border-radius: 50%;
-  padding: 0px;
-  margin: 5px;
-  box-shadow: 0 0 10px hsla(204, 100%, 58%, 0.934);
+  transition: transform 0.3s ease;
 }
 
 .icon-redsocial:hover {
-  background-color: hsla(204, 100%, 58%, 0.934);
-  box-shadow: 0 0 10px rgba(77, 139, 255, 0.815);
+  transform: scale(1.1);
 }
 
-h3 {
-  font-size: 1.2rem;
-  font-weight: 500;
-  text-align: center;
+.hero-actions {
+  margin-bottom: 1.5rem;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: white;
+  padding: 0.8rem 2.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary:hover {
+  filter: brightness(0.9);
+  transform: translateY(-2px);
+}
+
+.location-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: var(--color-secondary);
+  font-size: 0.9rem;
+  opacity: 0.8;
 }
 </style>
