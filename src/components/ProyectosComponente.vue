@@ -1,64 +1,5 @@
 <script setup>
-import proyecto1 from '/src/assets/restaurant.png';
-import proyecto2 from '/src/assets/e-learning.png';
-import proyecto3 from '/src/assets/blog.png';
-import proyecto4 from '/src/assets/restaurant.png';
-
-// Este componente muestra una galería de proyectos con información sobre cada proyecto
-import { ref } from 'vue';
-//.ref es una función que se utiliza para crear una referencia reactiva en Vue 3
-var misProyectos = ref([]);
-//.value es una propiedad que se utiliza para acceder al valor de una referencia reactiva en Vue 3
-misProyectos.value = [
-    {
-        id: 1,
-        src: proyecto1, // Imagen original
-        titulo: "Aplicación de Reservas para Restaurantes (2023)",
-        descripcion: "Creé una aplicación móvil con Flutter que permite a los usuarios reservar mesas en restaurantes locales."
-    },
-    {
-        id: 2,
-        src: proyecto2, // Imagen original
-        titulo: "Plataforma de E-learning (2022)",
-        descripcion: "Diseñé y desarrollé una plataforma de educación en línea utilizando Django y React. Incluye gestión de cursos y foros de discusión."
-    },
-    {
-        id: 3,
-        src: proyecto3, // Imagen original
-        titulo: "Blog Personal con CMS (2022)",
-        descripcion: "Construí un blog personal con un sistema de gestión de contenidos (CMS) personalizado en WordPress."
-    },
-    {
-        id: 4,
-        src: proyecto4, // Imagen original
-        titulo: "Sistema de Gestión de Inventarios (2023)",
-        descripcion: "Desarrollé un sistema de gestión de inventarios para pequeñas empresas utilizando Vue.js y Firebase."
-    },
-    {
-        id: 5,
-        src: "https://picsum.photos/300/200?random=5", // Imagen generada automáticamente
-        titulo: "Aplicación de Clima en Tiempo Real (2023)",
-        descripcion: "Creé una aplicación móvil que muestra el clima en tiempo real utilizando APIs públicas como OpenWeather."
-    },
-    {
-        id: 6,
-        src: "https://picsum.photos/300/200?random=6", // Imagen generada automáticamente
-        titulo: "Tienda en Línea con Carrito de Compras (2022)",
-        descripcion: "Diseñé una tienda en línea con Laravel y Vue.js que incluye un carrito de compras y pasarela de pagos."
-    },
-    {
-        id: 7,
-        src: "https://picsum.photos/300/200?random=7", // Imagen generada automáticamente
-        titulo: "Sistema de Gestión de Tareas (2023)",
-        descripcion: "Desarrollé un sistema de gestión de tareas colaborativo con Node.js y MongoDB. Incluye un tablero Kanban interactivo."
-    },
-    {
-        id: 8,
-        src: "https://picsum.photos/300/200?random=8", // Imagen generada automáticamente
-        titulo: "Aplicación de Seguimiento de Hábitos (2023)",
-        descripcion: "Construí una aplicación móvil para el seguimiento de hábitos diarios utilizando Flutter y Firebase."
-    }
-];
+import { proyectos } from '../data/data.js';
 </script>
 
 <template>
@@ -66,7 +7,7 @@ misProyectos.value = [
     <div class="galeria">
         <!-- Itera sobre cada proyecto en la lista de misProyectos -->
         <!--key es una propiedad especial que se utiliza para identificar de forma única cada elemento en una lista de Vue.js-->
-        <li class="proyecto" v-for="proyecto in misProyectos" :key="proyecto.id">
+        <li class="proyecto" v-for="proyecto in proyectos" :key="proyecto.id">
             <!-- Muestra la imagen del proyecto utilizando : que es una directiva de enlace de atributo en Vue.js -->
             <img :src="proyecto.src" :alt="proyecto.titlulo">
             <div class="proyecto-info">

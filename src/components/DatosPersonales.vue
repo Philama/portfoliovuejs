@@ -1,38 +1,33 @@
-<script setup>
-import linkedin from '/src/assets/icons8-linkedin.svg';
-import github from '/src/assets/icons8-github.svg';
+import { datosPersonales } from '../data/data.js';
 
-const fotoPerfil = "https://avatars.githubusercontent.com/u/25463245?v=4"; // Reemplaza con tu URL real
-const tittle = "Guardini Philama";
-const descripcion = "Tecnico Universitario en Programacion";
-const residencia = "Cordoba Capital, Cordoba, Argentina";
-const presentacion = "Hola, bienvenido a mi portafolio de proyectos. Soy un desarrollador web con experiencia en el desarrollo de aplicaciones web.";
-const redesSociales = [
-    {id: 1, name: "LinkedIn", src: linkedin, url: 'https://www.linkedin.com/in/guardini-philama/'},
-    {id: 2, name: "WhatsApp", src: 'https://img.icons8.com/color/48/whatsapp--v1.png', url: 'https://wa.me/5493512080323'},
-    {id: 3, name: "GitHub", src: github, url: 'https://github.com/Philama'}     
-];
-const mail = 'Guardi2005@yahoo.fr';
-</script>
 
 <template>
   <section class="datos-personales">
-       <div class="card">
-               <img :src="fotoPerfil" alt="Foto de perfil" class="foto-perfil" />
-               <h1>{{ tittle }}</h1>
-               <h2>{{descripcion}}</h2>
-               <p>{{presentacion}}</p>
-               <ul class="container-lista">
-                    <li v-for="red in redesSociales" :key="red.id">
-                        <a :href="red.url" target="_blank" rel="noopener noreferrer">
-                            <img class="icon-redsocial" :src="red.src" width="35rem" :alt="red.name">
-                        </a>
-                    </li>
-               </ul>
-               <h3>Contacto: {{mail}}</h3>
-               <h4>{{residencia}}</h4>
-         </div>
-   </section>
+    <div class="card">
+      <img :src="datosPersonales.fotoPerfil" alt="Foto de perfil" class="foto-perfil" />
+      <h1>{{ datosPersonales.nombre }}</h1>
+      <h2>{{ datosPersonales.titulo }}</h2>
+      <p class="descripcion">{{ datosPersonales.presentacion }}</p>
+
+      <ul class="container-lista">
+        <li v-for="red in datosPersonales.redesSociales" :key="red.id">
+          <a :href="red.url" target="_blank" rel="noopener noreferrer">
+            <img class="icon-redsocial" :src="red.src" width="35rem" :alt="red.name">
+          </a>
+        </li>
+      </ul>
+
+      <!-- Contact Button -->
+      <div class="contact-container">
+        <a :href="`mailto:${datosPersonales.email}`" class="btn-contacto">Contactar</a>
+      </div>
+
+      <div class="info-footer">
+        <!-- <h3>{{ datosPersonales.email }}</h3> -->
+        <h4>{{ datosPersonales.residencia }}</h4>
+      </div>
+    </div>
+  </section>
 </template>
 
 <style scoped>
@@ -44,14 +39,14 @@ h1 {
 h2 {
   text-align: center;
   font-size: 2rem;
-  color: rgb(236, 236, 236);
+  color: var(--color-text);
 }
 
 p {
   font-size: 1.2rem;
   font-weight: 100;
   margin-bottom: 1rem;
-  color: rgb(236, 236, 236);
+  color: var(--color-secondary);
 }
 
 .card {
@@ -98,5 +93,31 @@ h3 {
   font-size: 1.2rem;
   font-weight: 500;
   text-align: center;
+}
+
+.contact-container {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.btn-contacto {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.2s;
+  display: inline-block;
+}
+
+.btn-contacto:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.info-footer {
+  margin-top: 1rem;
+  color: #ccc;
 }
 </style>

@@ -1,10 +1,12 @@
 <template>
-  <nav class="navbar">
+      <nav class="navbar">
           <div class="navbar-menu">
               <ul>
-<!--Se coloco el operador v-bind al atributo href utilizando su minima expreción el operador : / y se soluciono el enlace a las distintas secciones-->
                   <a v-for="nav in navegacion" :key="nav.nombre" :href="nav.enlace" class="nav-item" >{{nav.nombre}}</a>  
               </ul>
+              <button class="dark-mode-btn" @click="changeMode">
+                  {{ isDark ? '☀️' : '🌙' }}
+              </button>
           </div>
       </nav>
 </template>
@@ -18,6 +20,13 @@ const navegacion= ref([
   {id:4, nombre:'Habilidades', enlace:'#habilidades'},
   {id:5, nombre:'Intereses', enlace:'#intereses'}
 ]);
+
+const isDark = ref(false);
+
+const changeMode = () => {
+    isDark.value = !isDark.value;
+    document.body.classList.toggle('dark');
+}
 </script>
 
 <style scoped>
@@ -66,5 +75,18 @@ a:hover {
     justify-content: center; /* Alinea los elementos al centro en pantallas pequeñas */
     width: 100%; /* Asegura que la navbar ocupe el 100% del ancho en pantallas pequeñas */
   }
+}
+
+.dark-mode-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-left: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.dark-mode-btn:hover {
+    transform: rotate(360deg);
 }
 </style>

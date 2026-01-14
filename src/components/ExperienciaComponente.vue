@@ -1,20 +1,7 @@
 <script setup>
-import icono1 from '/src/assets/ventas.svg';
-import icono2 from '/src/assets/ecomerce.svg';
-import icono3 from '/src/assets/configuracion.svg';
-import icono4 from '/src/assets/uiux.svg';
-import icono5 from '/src/assets/watch.svg';
-
-import { ref } from 'vue';
+import { experiencia } from '../data/data.js';
 const titulo = 'Desarrollador Full Stack';
 const fecha = 'Desde Enero 2022 - Actualidad';
-const experiencias = ref([
-    { id: 1, src: icono1, parrafo: 'Lideré un equipo de 5 desarrolladores en la creación de una plataforma de comercio electrónico que incrementó las ventas en un 35% durante el primer año.' },
-    { id: 2, src: icono2, parrafo: 'Diseñé y desarrollé aplicaciones web utilizando Node.js, React y MongoDB, logrando reducir el tiempo de carga de las páginas en un 50%.' },
-    { id: 3, src: icono3, parrafo: 'Implementé soluciones de autenticación y autorización, mejorando la seguridad del sitio web y reduciendo los intentos de acceso no autorizado en un 20%.' },
-    { id: 4, src: icono4, parrafo: 'Colaboré con diseñadores de UX/UI para crear interfaces de usuario atractivas y fáciles de usar, aumentando la satisfacción del cliente en un 15%.' },
-    { id: 5, src: icono5, parrafo: 'Automaticé procesos de despliegue continuo utilizando Jenkins y Docker, reduciendo los tiempos de despliegue en un 40%.' },
-]);
 </script>
 
 <template>
@@ -22,9 +9,9 @@ const experiencias = ref([
         <h3 class="titulo">{{ titulo }}</h3>
         <p class="fecha">{{ fecha }}</p>
         <ul class="listado">
-            <li class="item" v-for="experiencia in experiencias" :key="experiencia.id">
-                <img class="image-svg" :src="experiencia.src" width="45rem" :alt="experiencia.parrafo">
-                <p>{{ experiencia.parrafo }}</p>
+            <li class="item" v-for="item in experiencia" :key="item.id">
+                <img class="image-svg" :src="item.src" width="45rem" :alt="item.parrafo">
+                <p>{{ item.parrafo }}</p>
             </li>
         </ul>
     </div>
