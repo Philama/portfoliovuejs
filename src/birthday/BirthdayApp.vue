@@ -18,26 +18,26 @@ const polaroids = [
 const invitations = [
   { name: 'Jackeline', tag: 'Mi amor, mi todo', icon: Crown, color: '#ff4081', special: true,
     msg: 'Mi vida, gracias por llenar cada día de amor y felicidad. Sos lo mejor que me pasó. Celebrar mi cumple a tu lado es el mejor regalo que puedo tener. ¡Te amo infinito!',
-    file: 'jackeline.html', inviteText: 'Sos mi invitada de honor', inviteIcon: Heart },
+    file: 'jackeline', inviteText: 'Sos mi invitada de honor', inviteIcon: Heart },
   { name: 'Pony & Maru', tag: 'Mi amiga y su novia', icon: Users, color: '#ff4081', special: true,
     msg: 'Pony, sos una de mis mejores amigas, gracias por estar siempre. Maru, gracias por hacer feliz a Pony y por sumarte al grupo. ¡Las espero a las dos para festejar juntas mi cumple!',
-    file: 'pony-maru.html', inviteText: '¡Están oficialmente invitadas!', inviteIcon: Sparkles },
+    file: 'pony-maru', inviteText: '¡Están oficialmente invitadas!', inviteIcon: Sparkles },
   { name: 'Sol', tag: 'Amiga de Jacke y mía también', icon: Sun, color: '#fbbf24',
     msg: 'Sol, llegaste a mi vida a través de Jacke y ya sos parte del grupo. Gracias por la buena onda, las risas y por siempre sumar. ¡Te espero en mi cumple!',
-    file: 'sol.html', inviteText: '¡Estás oficialmente invitada!', inviteIcon: PartyPopper },
+    file: 'sol', inviteText: '¡Estás oficialmente invitada!', inviteIcon: PartyPopper },
   { name: 'Mariela', tag: 'Amiga de Jacke y del grupo', icon: Sparkles, color: '#a78bfa',
     msg: 'Mariela, gracias por siempre estar y por ser tan buena onda. Sos amiga de Jacke pero ya sos parte de la familia. ¡Venite a celebrar conmigo!',
-    file: 'mariela.html', inviteText: '¡Estás oficialmente invitada!', inviteIcon: PartyPopper },
+    file: 'mariela', inviteText: '¡Estás oficialmente invitada!', inviteIcon: PartyPopper },
   { name: 'Josue', tag: 'Un gran amigo', icon: GlassWater, color: '#34d399',
     msg: 'Josue, gracias por la buena onda, las juntadas y los buenos momentos. ¡Te espero en mi cumple para pasarla bien!',
-    file: 'josue.html', inviteText: '¡Estás oficialmente invitado!', inviteIcon: PartyPopper },
+    file: 'josue', inviteText: '¡Estás oficialmente invitado!', inviteIcon: PartyPopper },
 ]
 
 const copiedIndex = ref(-1)
 
 function copyLink(index, file) {
-  const base = window.location.href.replace(/birthday\.html.*$/, '').replace(/\/$/, '')
-  const url = base + '/birthday/' + file
+  const origin = window.location.origin
+  const url = origin + '/birthday/' + file
   navigator.clipboard.writeText(url).then(() => {
     copiedIndex.value = index
     setTimeout(() => copiedIndex.value = -1, 2000)
@@ -45,9 +45,9 @@ function copyLink(index, file) {
 }
 
 function shareWhatsApp(file) {
-  const base = window.location.href.replace(/birthday\.html.*$/, '').replace(/\/$/, '')
-  const url = base + '/birthday/' + file
-  window.open('https://wa.me/?text=' + encodeURIComponent('¡Estás invitado/a a mi cumpleaños! 🎉🍕\n\n' + url), '_blank')
+  const origin = window.location.origin
+  const url = origin + '/birthday/' + file
+  window.open('https://wa.me/?text=' + encodeURIComponent('Estás invitado/a a mi cumpleaños!\n\n' + url), '_blank')
 }
 
 onMounted(() => {

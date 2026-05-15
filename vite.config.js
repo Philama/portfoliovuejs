@@ -9,7 +9,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
-        birthday: resolve(__dirname, 'birthday.html'),
+        birthday: resolve(__dirname, 'birthday/index.html'),
       },
     },
   },
