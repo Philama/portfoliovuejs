@@ -8,8 +8,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Cormorant+Garamond:wght@600&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;background:#0d0a1a;background:radial-gradient(ellipse at 50% 30%,rgba(155,89,182,.15),transparent 70%),radial-gradient(ellipse at 80% 80%,rgba(232,71,122,.12),transparent),#0d0a1a;color:#fef9ef;padding:2rem;overflow:hidden}
+body{min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;background:#0d0a1a;background:radial-gradient(ellipse at 50% 30%,rgba(155,89,182,.15),transparent 70%),radial-gradient(ellipse at 80% 80%,rgba(232,71,122,.12),transparent),#0d0a1a;color:#fef9ef;padding:2rem;overflow-y:auto}
 .card{max-width:480px;width:100%;background:linear-gradient(145deg,rgba(30,22,50,.95),rgba(20,15,35,.98));border:1px solid rgba(232,197,71,.25);border-radius:20px;padding:3rem 2.5rem;text-align:center;position:relative;overflow:hidden;animation:appear .8s ease-out}
+@media(max-width:480px){body{padding:1rem .8rem;align-items:flex-start}.card{padding:2rem 1.5rem;border-radius:16px}.hi{width:64px;height:64px}.hi svg{width:28px;height:28px}.name{font-size:2rem}.msg{font-size:1.15rem;margin-bottom:1.5rem}.details{gap:.7rem}.det{padding:.8rem}.det .di svg{width:18px;height:18px}.det .dv{font-size:1rem}}
 .card::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#e8c547,#e8477a,#c8a2e8)}
 .hi{display:flex;align-items:center;justify-content:center;width:80px;height:80px;border-radius:50%;margin:0 auto 1rem;background:linear-gradient(135deg,rgba(251,191,36,.12),rgba(251,191,36,.06));border:1px solid rgba(251,191,36,.3);color:#fbbf24;box-shadow:0 0 20px rgba(251,191,36,.1);animation:bounce 2s ease-in-out infinite}
 .hi svg{width:36px;height:36px}
