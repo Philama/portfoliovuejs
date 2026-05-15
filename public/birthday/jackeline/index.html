@@ -2,7 +2,8 @@
 <title>Jackeline — Estás invitada!</title>
 <meta property="og:title" content="Jackeline, estás invitada a mi cumple!">
 <meta property="og:description" content="Noche de Pizzas y Brindis — 15 de Mayo, 21:00hs — Tristán Narvaja 3053">
-<meta property="og:image" content="../img/hero-banner.png">
+<meta property="og:image" content="https://philama.github.io/portfoliovuejs/birthday/img/hero-banner.png">
+<meta property="og:url" content="https://philama.github.io/portfoliovuejs/birthday/jackeline">
 <meta property="og:type" content="website">
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Cormorant+Garamond:wght@600&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
@@ -10,13 +11,15 @@
 body{min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;background:#0d0a1a;background:radial-gradient(ellipse at 50% 30%,rgba(155,89,182,.15),transparent 70%),radial-gradient(ellipse at 80% 80%,rgba(232,71,122,.12),transparent),#0d0a1a;color:#fef9ef;padding:2rem;overflow:hidden}
 .card{max-width:480px;width:100%;background:linear-gradient(145deg,rgba(30,22,50,.95),rgba(20,15,35,.98));border:1px solid rgba(232,71,122,.4);border-radius:20px;padding:3rem 2.5rem;text-align:center;position:relative;overflow:hidden;animation:appear .8s ease-out}
 .card::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#e8477a,#ff6b9d,#ff85a2)}
-.emoji{font-size:4rem;margin-bottom:1rem;display:block;animation:bounce 2s ease-in-out infinite}
+.hi{display:flex;align-items:center;justify-content:center;width:80px;height:80px;border-radius:50%;margin:0 auto 1rem;background:linear-gradient(135deg,rgba(255,64,129,.12),rgba(255,64,129,.06));border:1px solid rgba(255,64,129,.3);color:#ff4081;box-shadow:0 0 20px rgba(255,64,129,.1);animation:bounce 2s ease-in-out infinite}
+.hi svg{width:36px;height:36px}
 .name{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:600;background:linear-gradient(135deg,#f5e6a3,#ff6b9d);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.3rem}
 .tag{font-family:'Caveat',cursive;font-size:1.2rem;color:#ff6b9d;margin-bottom:1.5rem}
 .msg{font-family:'Caveat',cursive;font-size:1.3rem;line-height:1.6;opacity:.85;margin-bottom:2rem}
 .details{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
 .det{background:rgba(255,255,255,.04);border:1px solid rgba(232,197,71,.15);border-radius:10px;padding:1rem}
-.det .di{font-size:1.5rem}.det .dl{font-family:'Caveat',cursive;font-size:.9rem;color:#c8a2e8}
+.det .di{display:flex;align-items:center;justify-content:center;margin-bottom:.3rem;color:#fde68a;opacity:.8}.det .di svg{width:22px;height:22px}
+.det .dl{font-family:'Caveat',cursive;font-size:.9rem;color:#c8a2e8}
 .det .dv{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#f5e6a3;font-weight:600}
 .ft{font-family:'Caveat',cursive;font-size:1.1rem;color:#c8a2e8;opacity:.6;margin-top:1rem}
 .back-link{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.5rem;padding:.6rem 1.5rem;border:1px solid rgba(212,160,23,.3);border-radius:10px;color:#fde68a;font-family:'Outfit',sans-serif;font-size:.85rem;text-decoration:none;transition:all .3s;background:rgba(255,255,255,.04)}
@@ -26,15 +29,15 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;fon
 @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 </style></head><body>
 <div class="card">
-<span class="emoji">💕</span>
+<div class="hi"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 .932.638l5.669.086a.5.5 0 0 1 .29.9l-4.592 3.47a1 1 0 0 0-.37.99l1.37 5.597a.5.5 0 0 1-.756.543l-4.87-2.874a1 1 0 0 0-1.025 0l-4.87 2.874a.5.5 0 0 1-.757-.543l1.37-5.597a1 1 0 0 0-.37-.99L2.849 10.5a.5.5 0 0 1 .29-.9l5.669-.086a1 1 0 0 0 .932-.638z"/></svg></div>
 <div class="name">Jackeline</div>
 <div class="tag">Mi amor, mi todo</div>
 <div class="msg">Mi vida, gracias por llenar cada día de amor y felicidad. Sos lo mejor que me pasó. Celebrar mi cumple a tu lado es el mejor regalo que puedo tener. ¡Te amo infinito!</div>
 <div class="details">
-<div class="det"><div class="di">📅</div><div class="dl">Fecha</div><div class="dv">15 de Mayo</div></div>
-<div class="det"><div class="di">⏰</div><div class="dl">Hora</div><div class="dv">21:00 hs</div></div>
-<div class="det"><div class="di">📍</div><div class="dl">Lugar</div><div class="dv">Tristán Narvaja 3053</div></div>
-<div class="det"><div class="di">🍕</div><div class="dl">Menú</div><div class="dv">Pizzas y Brindis</div></div>
+<div class="det"><div class="di"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg></div><div class="dl">Fecha</div><div class="dv">15 de Mayo</div></div>
+<div class="det"><div class="di"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="dl">Hora</div><div class="dv">21:00 hs</div></div>
+<div class="det"><div class="di"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></div><div class="dl">Lugar</div><div class="dv">Tristán Narvaja 3053</div></div>
+<div class="det"><div class="di"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 11h.01"/><path d="M11 15h.01"/><path d="M16 16c.5-.5 1.143-1.111 1.143-1.111l.857-.858a2 2 0 0 0-2.828-2.829l-.858.858S13.5 12.5 13 13"/><path d="M8 8c-.5.5-1.143 1.111-1.143 1.111l-.857.858a2 2 0 1 0 2.828 2.829l.858-.858C10.5 11.5 11 11 11.5 10.5"/><path d="m11.5 10.5 1 1"/><path d="M12 2a10 10 0 1 0 10 10"/><path d="M2 10h4"/><path d="M10 2v4"/></svg></div><div class="dl">Menú</div><div class="dv">Pizzas y Brindis</div></div>
 </div>
 <div class="ft">Hecho con amor — ¡Te espero!</div>
 <a href="/birthday" class="back-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg> Ver la fiesta completa</a>
