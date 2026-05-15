@@ -1,133 +1,197 @@
 <template>
-  <nav class="navbar">
-    <div class="navbar-menu">
-      <a href="#top" class="logo-link">
-        <img :src="datosPersonales.logo" alt="Logo" class="logo" />
+  <nav class="navbar" :class="{ 'navbar-scrolled': scrolled }">
+    <div class="navbar-container">
+      <a href="#top" class="navbar-logo">
+        <img :src="logo" alt="Logo" class="logo-img" />
       </a>
-      <ul>
-        <a v-for="nav in navegacion" :key="nav.nombre" :href="nav.enlace" class="nav-item">{{ nav.nombre }}</a>
+      
+      <ul class="nav-links">
+        <li v-for="nav in navegacion" :key="nav.nombre">
+          <a :href="nav.enlace" class="nav-link">{{ nav.nombre }}</a>
+        </li>
       </ul>
-      <button class="dark-mode-btn" @click="changeMode">
-        {{ isDark ? '☀️' : '🌙' }}
-      </button>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" @click="toggleDarkMode" :aria-label="isDark ? 'Light mode' : 'Dark mode'">
+          <span v-if="isDark">☀️</span>
+          <span v-else>🌙</span>
+        </button>
+      </div>
     </div>
   </nav>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { datosPersonales } from '../data/data.js';
+import { ref, onMounted, onUnmounted } from 'vue';
 
-const navegacion = ref([
+defineProps({
+  logo: {
+    type: String,
+    required: true
+  }
+});
+
+const navegacion = [
   { id: 1, nombre: 'Educación', enlace: '#educacion' },
   { id: 2, nombre: 'Experiencia', enlace: '#experiencia' },
   { id: 3, nombre: 'Proyectos', enlace: '#proyectos' },
   { id: 4, nombre: 'Habilidades', enlace: '#habilidades' },
   { id: 5, nombre: 'Intereses', enlace: '#intereses' }
-]);
+];
 
 const isDark = ref(false);
+const scrolled = ref(false);
 
-const changeMode = () => {
+const toggleDarkMode = () => {
   isDark.value = !isDark.value;
-  document.body.classList.toggle('dark');
+  document.body.classList.toggle('dark', isDark.value);
+  localStorage.setItem('theme', isDark.value ? 'dark' : 'light');
 }
+
+const handleScroll = () => {
+  scrolled.value = window.scrollY > 20;
+}
+
+onMounted(() => {
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    isDark.value = true;
+    document.body.classList.add('dark');
+  }
+  window.addEventListener('scroll', handleScroll);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll);
+});
 </script>
 
 <style scoped>
 .navbar {
   position: fixed;
-  /* Fija la barra de navegación en la parte superior */
   top: 0;
-  /* Alinea la barra al borde superior */
   left: 0;
-  /* Alinea la barra al borde izquierdo */
   width: 100%;
-  /* Asegura que la barra ocupe todo el ancho */
   z-index: 1000;
-  /* Asegura que la barra esté por encima de otros elementos */
-  background-color: #01182c;
-  /* Fondo sólido azul */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  /* Sombra para destacar la barra */
-  padding: 1rem;
-  /* Espaciado interno */
-  color: #fff;
-  /* Establece el color del texto en blanco */
-  align-items: center;
-  /* Centra verticalmente los elementos dentro de la navbar */
+  padding: 1.25rem 0;
+  transition: var(--transition-all);
 }
 
-.navbar-item {
-  color: #ffffff;
-  /* Establece el color del texto en blanco */
-  text-decoration: none;
-  /* Elimina el subrayado de los enlaces */
-  margin-right: 1rem;
-  /* Añade un margen derecho de 1rem entre los elementos */
+.navbar-scrolled {
+  padding: 0.75rem 0;
+  background: rgba(var(--color-surface), 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
 }
 
-.navbar-menu {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
+/* Need to handle background color specifically because backdrop-filter needs opacity */
+.navbar-scrolled {
+  background: var(--color-surface); /* Fallback */
 }
 
-.logo {
-  height: 40px;
-  /* Tamaño ajustado para navbar */
-  width: 40px;
-  border-radius: 50%;
-  margin-right: 1rem;
-  border: 2px solid white;
-  object-fit: cover;
-}
-
-a {
-  position: relative;
-  /* Necesario para efectos futuros */
-  color: #fff;
-  /* Color del texto */
-  text-decoration: none;
-  /* Elimina el subrayado de los enlaces */
-  margin-right: 1rem;
-  /* Añade un margen derecho de 1rem entre los elementos */
-  border-radius: 5px;
-  /* Redondea las esquinas del borde */
-  padding: 5px;
-  /* Añade un padding de 5px alrededor del contenido */
-  transition: transform 0.2s;
-  /* Transición suave para el efecto */
-}
-
-a:hover {
-  background-color: #0056b3;
-  /* Cambia el color de fondo al pasar el mouse sobre un enlace */
-  box-shadow: 0 0 10px #0056b3;
-}
-
-@media (max-width: 768px) {
-  .navbar-menu {
-    display: flex;
-    /* Organiza los elementos en línea usando flexbox */
-    justify-content: center;
-    /* Alinea los elementos al centro en pantallas pequeñas */
-    width: 100%;
-    /* Asegura que la navbar ocupe el 100% del ancho en pantallas pequeñas */
+@supports (backdrop-filter: blur(12px)) {
+  .navbar-scrolled {
+    background: transparent;
+  }
+  .navbar::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    transition: var(--transition-all);
+  }
+  .navbar-scrolled::before {
+    background: rgba(var(--color-surface-rgb), 0.8);
+    backdrop-filter: blur(12px);
   }
 }
 
-.dark-mode-btn {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  margin-left: 1rem;
-  transition: transform 0.3s ease;
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.dark-mode-btn:hover {
-  transform: rotate(360deg);
+.logo-img {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--color-accent);
+  object-fit: cover;
+  transition: var(--transition-all);
+}
+
+.logo-img:hover {
+  transform: rotate(10deg);
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  color: var(--color-text);
+  font-weight: 500;
+  font-size: 0.9375rem;
+  text-decoration: none;
+  transition: var(--transition-all);
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-accent);
+  transition: var(--transition-all);
+}
+
+.nav-link:hover {
+  color: var(--color-accent);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.theme-toggle {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  transition: var(--transition-all);
+  box-shadow: var(--shadow-sm);
+}
+
+.theme-toggle:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
 }
 </style>

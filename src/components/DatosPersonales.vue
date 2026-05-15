@@ -2,35 +2,35 @@
 import { datosPersonales } from '../data/data.js';
 </script>
 
-
 <template>
-  <section class="hero-section">
-    <div class="hero-content">
-      <div class="hero-image">
-        <img :src="datosPersonales.fotoPerfil" alt="Foto de perfil" />
+  <section class="hero">
+    <div class="hero-container">
+      <div class="hero-image-wrapper">
+        <img :src="datosPersonales.fotoPerfil" alt="Foto de perfil" class="hero-avatar" />
       </div>
 
-      <div class="hero-text">
-        <h1>{{ datosPersonales.nombre }}</h1>
-        <h2>{{ datosPersonales.titulo }}</h2>
-        <p class="descripcion">{{ datosPersonales.presentacion }}</p>
+      <div class="hero-content">
+        <h1 class="hero-title">{{ datosPersonales.nombre }}</h1>
+        <p class="hero-subtitle">{{ datosPersonales.titulo }}</p>
+        <p class="hero-description">{{ datosPersonales.presentacion }}</p>
 
-        <ul class="social-links">
-          <li v-for="red in datosPersonales.redesSociales" :key="red.id">
-            <a :href="red.url" target="_blank" rel="noopener noreferrer">
-              <img class="icon-redsocial" :src="red.src" :alt="red.name">
-            </a>
-          </li>
-        </ul>
+        <div class="hero-footer">
+          <div class="contact-badges">
+            <span class="badge"><i class="icon">📧</i> {{ datosPersonales.email }}</span>
+            <span class="badge"><i class="icon">📍</i> {{ datosPersonales.residencia }}</span>
+          </div>
 
-        <div class="hero-actions">
-          <a :href="`mailto:${datosPersonales.email}`" class="btn-primary">Contactar</a>
-        </div>
+          <ul class="social-links">
+            <li v-for="red in datosPersonales.redesSociales" :key="red.id">
+              <a :href="red.url" target="_blank" rel="noopener noreferrer" class="social-link">
+                <img :src="red.src" :alt="red.name" class="social-icon theme-icon">
+              </a>
+            </li>
+          </ul>
 
-        <div class="location-info">
-          <p>{{ datosPersonales.email }}</p>
-          <p>{{ datosPersonales.telefono }}</p>
-          <small>{{ datosPersonales.residencia }}</small>
+          <div class="hero-cta">
+            <a :href="`mailto:${datosPersonales.email}`" class="btn-cta">Contactar</a>
+          </div>
         </div>
       </div>
     </div>
@@ -38,110 +38,141 @@ import { datosPersonales } from '../data/data.js';
 </template>
 
 <style scoped>
-.hero-section {
-  padding: 4rem 2rem;
+.hero {
+  min-height: 80vh;
   display: flex;
+  align-items: center;
   justify-content: center;
-  background-color: var(--color-background);
+  padding: 4rem 1rem;
 }
 
-.hero-content {
+.hero-container {
+  max-width: 900px;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  /* Stacked layout for centered look */
   align-items: center;
-  max-width: 800px;
-  /* Reduced width for better centered focus */
-  width: 100%;
-  gap: 2rem;
+  gap: 3rem;
   text-align: center;
 }
 
-.hero-image img {
-  width: 200px;
-  height: 200px;
+.hero-avatar {
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
   object-fit: cover;
-  border: 4px solid var(--color-primary);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  border: 4px solid var(--color-surface);
+  box-shadow: var(--shadow-lg);
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.hero-text {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* Center everything */
-  gap: 1rem;
+.hero-avatar:hover {
+  transform: scale(1.05) rotate(5deg);
 }
 
-h1 {
-  font-size: 3rem;
-  line-height: 1.2;
-  color: var(--color-primary);
-  /* Check main.css/base.css for this variable */
+.hero-title {
+  font-size: clamp(2.5rem, 8vw, 4rem);
   font-weight: 800;
+  color: var(--color-primary);
+  line-height: 1.1;
   margin-bottom: 0.5rem;
 }
 
-h2 {
+.hero-subtitle {
   font-size: 1.5rem;
-  color: var(--color-secondary);
-  font-weight: 500;
-  margin-bottom: 1rem;
+  color: var(--color-accent);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 1.5rem;
 }
 
-.descripcion {
-  font-size: 1.2rem;
-  color: var(--color-text);
-  max-width: 600px;
-  line-height: 1.6;
-  opacity: 0.9;
+.hero-description {
+  font-size: 1.125rem;
+  color: var(--color-text-muted);
+  max-width: 650px;
+  margin: 0 auto 2rem;
+  line-height: 1.8;
+}
+
+.hero-footer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.contact-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.badge {
+  background: var(--color-surface);
+  padding: 0.5rem 1rem;
+  border-radius: 100px;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .social-links {
   display: flex;
-  gap: 1.5rem;
+  gap: 1.25rem;
   list-style: none;
   padding: 0;
-  margin: 1.5rem 0;
 }
 
-.icon-redsocial {
-  width: 35px;
-  height: 35px;
-  transition: transform 0.3s ease;
-}
-
-.icon-redsocial:hover {
-  transform: scale(1.1);
-}
-
-.hero-actions {
-  margin-bottom: 1.5rem;
-}
-
-.btn-primary {
-  background-color: var(--color-primary);
-  color: white;
-  padding: 0.8rem 2.5rem;
-  border-radius: 50px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: background-color 0.3s, transform 0.2s;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.btn-primary:hover {
-  filter: brightness(0.9);
-  transform: translateY(-2px);
-}
-
-.location-info {
+.social-link {
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  color: var(--color-secondary);
-  font-size: 0.9rem;
-  opacity: 0.8;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: var(--color-surface);
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+  transition: var(--transition-all);
+}
+
+.social-link:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.social-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.btn-cta {
+  background: var(--color-accent);
+  color: #fff;
+  padding: 1rem 3rem;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1.125rem;
+  transition: var(--transition-all);
+  box-shadow: 0 10px 20px -5px rgba(13, 148, 136, 0.3);
+}
+
+.btn-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.3);
+  filter: brightness(1.1);
+}
+
+@media (max-width: 640px) {
+  .hero-avatar {
+    width: 140px;
+    height: 140px;
+  }
 }
 </style>

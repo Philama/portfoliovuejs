@@ -45,9 +45,9 @@ export const datosPersonales = {
   fotoPerfil: "https://avatars.githubusercontent.com/u/25463245?v=4",
   logo: imgLogo,
   redesSociales: [
-    { id: 1, name: "LinkedIn", src: iconLinkedin, url: 'https://www.linkedin.com/in/guardini-philama/' },
-    { id: 2, name: "WhatsApp", src: 'https://img.icons8.com/color/48/whatsapp--v1.png', url: 'https://wa.me/5493512080323' },
-    { id: 3, name: "GitHub", src: iconGithub, url: 'https://github.com/Philama' }
+    { id: 1, name: "LinkedIn", src: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/linkedin.svg', url: 'https://www.linkedin.com/in/guardini-philama/' },
+    { id: 2, name: "WhatsApp", src: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/whatsapp.svg', url: 'https://wa.me/5493512080323' },
+    { id: 3, name: "GitHub", src: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/github.svg', url: 'https://github.com/Philama' }
   ]
 };
 

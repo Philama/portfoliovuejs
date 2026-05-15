@@ -1,140 +1,186 @@
 <script setup>
 import { defineAsyncComponent } from 'vue';
-import DescargarPDF from './components/DescargarPDF.vue';
+import { 
+  datosPersonales, 
+  experiencia, 
+  proyectos, 
+  habilidades, 
+  intereses 
+} from './data/data.js';
 
-const NavBar = defineAsyncComponent(() => import('./components/NavBar.vue'));
-const DatosPersonales = defineAsyncComponent(() => import('./components/DatosPersonales.vue'));
+import DescargarPDF from './components/DescargarPDF.vue';
+import NavBar from './components/NavBar.vue';
+import DatosPersonales from './components/DatosPersonales.vue';
+
 const Educacion = defineAsyncComponent(() => import('./components/EducacionComponente.vue'));
 const ExperienciaComponente = defineAsyncComponent(() => import('./components/ExperienciaComponente.vue'));
 const ProyectosComponente = defineAsyncComponent(() => import('./components/ProyectosComponente.vue'));
 const HabilidadesComponente = defineAsyncComponent(() => import('./components/HabilidadesComponente.vue'));
 const InteresesComponente = defineAsyncComponent(() => import('./components/InteresesComponente.vue'));
+
+const educacionData = [
+    {
+        fecha: '2022',
+        title: 'Tecnicatura Universitaria en Programación',
+        descripcion: 'Operación y programación de computadoras.',
+        enlace: 'https://youtube.com',
+    },
+    {
+        fecha: '2015',
+        title: 'Ingeniería en Sistemas',
+        descripcion: 'Universidad Tecnológica de Córdoba',
+        enlace: 'https://youtube.com',
+    },
+    {
+        fecha: '2021 - 2022',
+        title: 'TEST AUTOMATION UNIVERSITY (TAU)',
+        descripcion: 'Web UI JavaScript Path & Mobile JavaScript Path.',
+        enlace: 'https://testautomationu.applitools.com/',
+    },
+    {
+        fecha: 'Jul-2022 - 2023',
+        title: 'AVALTH Skill Factory ReactJS',
+        descripcion: 'Training in Full Stack MERN Development provided by the Avalith team.',
+        enlace: 'https://avalith.net/',
+    },
+];
 </script>
 
 <template>
     <header id="top">
-        <NavBar />
+        <NavBar :logo="datosPersonales.logo" />
         <DatosPersonales />
+        <h1 class="visual-hidden">{{ datosPersonales.nombre }} - {{ datosPersonales.titulo }}</h1>
     </header>
-    <main>
-        <div class="container">
-            <section id="educacion" class="fade-in">
-                <h2>Educación - Cursos</h2>
-                <Educacion />
-            </section>
-            <section id="experiencia" class="fade-in">
-                <h2>Experiencia</h2>
-                <ExperienciaComponente />
-            </section>
-            <section id="proyectos" class="fade-in">
-                <h2>Proyectos</h2>
-                <ProyectosComponente />
-            </section>
-            <section id="habilidades" class="fade-in">
-                <h2>Habilidades</h2>
-                <HabilidadesComponente />
-            </section>
-            <section id="intereses" class="fade-in">
-                <h2>Intereses</h2>
-                <InteresesComponente />
-            </section>
-        </div>
+    
+    <main class="container">
+        <section id="educacion" class="fade-in">
+            <h2>Educación</h2>
+            <Educacion :educacion="educacionData" />
+        </section>
+        
+        <section id="experiencia" class="fade-in">
+            <h2>Experiencia</h2>
+            <ExperienciaComponente :experiencia="experiencia" />
+        </section>
+        
+        <section id="proyectos" class="fade-in">
+            <h2>Proyectos Destacados</h2>
+            <ProyectosComponente :proyectos="proyectos" />
+        </section>
+        
+        <section id="habilidades" class="fade-in">
+            <h2>Stack Tecnológico</h2>
+            <HabilidadesComponente :habilidades="habilidades" />
+        </section>
+        
+        <section id="intereses" class="fade-in">
+            <h2>Más sobre mí</h2>
+            <InteresesComponente :intereses="intereses" />
+        </section>
     </main>
-    <footer>
-        <a href="#top" class="back-to-top">⬆ Volver al Inicio</a>
-        <p>© 2024 Guardini Philama - Portafolio web - UTN FRSR</p>
+
+    <footer class="footer">
+        <div class="footer-content">
+          <a href="#top" class="back-to-top" aria-label="Volver al inicio">
+            <span class="arrow">↑</span>
+          </a>
+          <p class="copyright">© 2024 {{ datosPersonales.nombre }}</p>
+          <p class="footer-tagline">Soluciones Digitales & Desarrollo Full Stack</p>
+        </div>
     </footer>
 
-    <!-- Botón para descargar PDF -->
     <DescargarPDF />
 </template>
 
 <style scoped>
-  footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2rem;
-    font-size: 1.3rem;
-    background-color: #f8f9fa;
-  }
+.visual-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
 
-  .back-to-top {
-    margin-bottom: 1rem;
-    padding: 0.5rem 1rem;
-    background-color: #007bff;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-  }
+.footer {
+  padding: 5rem 0 3rem;
+  background: var(--color-surface);
+  color: var(--color-text);
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+  margin-top: 4rem;
+  transition: var(--transition-all);
+}
 
-  .back-to-top:hover {
-    background-color: #0056b3;
-  }
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
 
-  /* Animaciones */
-  .fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeIn 1s ease-in-out forwards;
-  }
+.back-to-top {
+  width: 50px;
+  height: 50px;
+  background: var(--color-accent);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  transition: var(--transition-all);
+  margin-bottom: 1rem;
+  box-shadow: var(--shadow-md);
+}
 
-  @keyframes fadeIn {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-  }
+.back-to-top:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
 
-  /* Botón de modo oscuro */
-  .dark-mode-toggle {
-    margin: 1rem;
-    padding: 0.5rem 1rem;
-    background-color: var(--button-bg);
-    color: var(--button-text);
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
+.copyright {
+  font-weight: 700;
+  font-size: 1.125rem;
+  margin: 0;
+  color: var(--color-primary);
+}
 
-  .dark-mode-toggle:hover {
-    background-color: var(--button-bg-hover);
-  }
+.footer-tagline {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  margin: 0;
+}
 
-  /* Estilos para el modo oscuro */
-  body.dark {
-    background-color: #121212;
-    color: #ffffff;
-  }
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
 
-  body.dark a {
-    color: #90caf9;
-  }
+section {
+  padding: 8rem 0;
+}
 
-  /* Estilo para el botón flotante */
-  .btn-descargar {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    font-size: 1.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-  }
+section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  text-align: center;
+  color: var(--color-primary);
+}
 
-  .btn-descargar:hover {
-    background-color: #0056b3;
-    transform: scale(1.1);
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInSection 1s ease-out forwards;
+}
+
+@keyframes fadeInSection {
+  to {
+      opacity: 1;
+      transform: translateY(0);
   }
+}
 </style>

@@ -1,16 +1,26 @@
 <script setup>
-import { habilidades } from '../data/data.js';
+defineProps({
+  habilidades: {
+    type: Array,
+    required: true
+  }
+});
 </script>
 
 <template>
-    <div class="skills-contenedor">
-        <div v-for="habilidad in habilidades" :key="habilidad.id" class="skills-categoria">
-            <h3>{{ habilidad.nombre }}</h3>
-            <ul class="skills">
-                <li v-for="habilidadItem in habilidad.habilidades" :key="habilidadItem.id" class="skill">
-                    <img v-if="habilidad.nombre !== 'Idiomas'" :src="habilidadItem.icono" :alt="habilidadItem.nombre">
-                    <span v-else class="emoji-flag">{{ habilidadItem.icono }}</span>
-                    <span>{{ habilidadItem.nombre }}: {{ habilidadItem.nivel }}</span>
+    <div class="skills-section">
+        <div v-for="categoria in habilidades" :key="categoria.id" class="skills-category">
+            <h3 class="category-title">{{ categoria.nombre }}</h3>
+            <ul class="skills-grid">
+                <li v-for="item in categoria.habilidades" :key="item.id" class="skill-card">
+                    <div class="skill-icon-wrapper">
+                      <img v-if="categoria.nombre !== 'Idiomas'" :src="item.icono" :alt="item.nombre" class="skill-icon icon-flip">
+                      <span v-else class="skill-emoji" aria-hidden="true">{{ item.icono }}</span>
+                    </div>
+                    <div class="skill-info">
+                      <span class="skill-name">{{ item.nombre }}</span>
+                      <span class="skill-level">{{ item.nivel }}</span>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -18,75 +28,99 @@ import { habilidades } from '../data/data.js';
 </template>
 
 <style scoped>
-.skills-contenedor {
-    padding: 2rem;
-}
-
-.skills-categoria {
-    margin-bottom: 20px;
-}
-
-.skills-categoria h3 {
+.skills-section {
     display: flex;
-    justify-content: left;
-    margin-bottom: 10px;
-    font-size: 1.5em;
-    color: var(--color-text);
-    font-size: 1.5em;
-    font-weight: bold;
+    flex-direction: column;
+    gap: 4rem;
 }
 
-.skills {
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    gap: 20px;
+.category-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 2rem;
+    padding-left: 1rem;
+    border-left: 4px solid var(--color-accent);
 }
 
-.skill {
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.5rem;
+    padding: 0;
+    list-style: none;
+}
+
+.skill-card {
+    background: var(--color-surface);
+    padding: 1.25rem;
+    border-radius: 16px;
+    border: 1px solid var(--color-border);
     display: flex;
-    justify-content: center;
     align-items: center;
-    gap: 10px;
-    background-color: rgba(241, 245, 243, 0.856);
-    padding: 0.3em;
-    border-radius: 8px;
-    box-shadow: 0px 4px 12px rgba(2, 151, 151, 0.963);
-    flex: 1 1 200px;
-    max-width: 250px;
+    gap: 1rem;
+    transition: var(--transition-all);
+    box-shadow: var(--shadow-sm);
 }
 
-.skill:hover {
-    background-color: rgba(24, 197, 197, 0.963);
+.skill-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-md);
 }
 
-.skill img {
-    width: 35px;
-    height: 35px;
+.skill-icon-wrapper {
+    width: 48px;
+    height: 48px;
+    background: var(--color-background);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: var(--transition-all);
 }
 
-.skill span {
-    font-size: 1em;
-    color: #333;
+.skill-card:hover .skill-icon-wrapper {
+    background: var(--color-accent);
+    color: white;
 }
 
-.skill:hover {
-    font-size: 1.1em;
-    transition: 2s ease;
+.skill-icon {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    transition: var(--transition-all);
 }
 
-@media (max-width: 768px) {
-    .skills-categoria h3 {
-        justify-content: center;
+.skill-card:hover .skill-icon {
+    filter: brightness(0) invert(1);
+}
+
+.skill-emoji {
+    font-size: 1.5rem;
+}
+
+.skill-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.skill-name {
+    font-weight: 600;
+    color: var(--color-primary);
+    font-size: 1rem;
+}
+
+.skill-level {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    font-weight: 500;
+}
+
+@media (max-width: 640px) {
+    .skills-grid {
+        grid-template-columns: 1fr;
     }
-
-    .skill {
-        justify-content: center;
-    }
-}
-
-.emoji-flag {
-    font-size: 2rem;
-    line-height: 1;
 }
 </style>
